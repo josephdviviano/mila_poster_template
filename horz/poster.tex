@@ -1,0 +1,220 @@
+\documentclass[final]{beamer}
+
+% ====================
+% Packages
+% ====================
+% Set custom size: 121.92cm x 91.44cm (approx 48x36 inches)
+\usepackage[orientation=landscape,size=custom,width=121.92,height=91.44,scale=1.4,debug]{beamerposter}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[default]{lato}
+\usepackage{tcolorbox} % For colored boxes
+\usepackage{graphicx} % For images
+\tcbuselibrary{skins}
+% ====================
+% Colors
+% ====================
+\definecolor{MilaMauve}{HTML}{662e7d}
+\definecolor{MilaWhite}{HTML}{FFFFFF}
+\definecolor{TextDark}{HTML}{333333}
+\definecolor{LightGray}{HTML}{F0F0F0}
+
+% ====================
+% Styling
+% ====================
+\setbeamercolor{background canvas}{bg=MilaWhite}
+\setbeamercolor{normal text}{fg=black}
+\setbeamercolor{headline}{bg=MilaMauve,fg=MilaWhite}
+\setbeamercolor{block title}{bg=LightGray,fg=black}
+\setbeamercolor{block body}{bg=white,fg=black}
+
+\renewcommand{\familydefault}{\sfdefault}
+\renewcommand{\normalsize}{\fontsize{42}{50}\selectfont}
+\normalsize
+
+\newcommand{\PosterHeading}[1]{\fontsize{77}{84}\selectfont\bfseries #1}
+\newcommand{\TakeawayFont}[1]{{\fontsize{78}{86}\selectfont\bfseries #1}}
+\newcommand{\SectionHeading}[1]{\fontsize{48}{54}\selectfont\bfseries #1}
+
+\tcbset{
+    posterbox/.style={
+        colback=white,
+        boxrule=0pt,
+        sharp corners,
+        enhanced,
+        left=0.6cm,
+        right=0.6cm,
+        top=0.4cm,
+        bottom=0.6cm
+    }
+}
+
+% Remove default navigation symbols
+\setbeamertemplate{navigation symbols}{}
+
+% Remove vertical spacing at the top of the document.
+% put this before \begin{document}
+\makeatletter
+\addtobeamertemplate{frame begin}{%
+  \vspace*{-\dimexpr\beamer@frametopskip\relax}%
+}{}
+\makeatother
+
+% ====================
+% Document
+% ====================
+\begin{document}
+
+\begin{frame}[t]
+
+    % --------------------------------------------------------
+    % TOP HORIZONTAL BLOCK: TITLE (15% HEIGHT)
+    % --------------------------------------------------------
+ \setbeamercolor{headline}{bg=MilaMauve,fg=MilaWhite}
+
+\begin{beamercolorbox}[wd=\paperwidth,ht=0.15\paperheight,dp=0ex,center,fg=milaWhite]{headline}
+        \begin{minipage}[c][0.15\paperheight]{0.64\textwidth}
+            \vspace*{-12cm} % same offset so both columns align
+            {\raggedright\TakeawayFont{One sentence takeaway for people walking by your poster, but not stopping}}\\[0.8em]
+            {\PosterHeading{Paper Title}}\\[0.4em]
+            {\Large Author One \quad Author Two \quad Author Three}\\[0.2em]
+            {\large Institution One \quad|\quad Institution Two}
+        \end{minipage}%
+        \hfill
+        \begin{minipage}[c][0.15\paperheight]{0.3\textwidth}
+            {\large Scan for the paper}\\[0.5em]
+            \begin{center}
+                \vspace*{-12cm} % same offset so both columns align
+                \includegraphics[width=4.5cm]{example-image-1x1}\\[0.4em]
+                {\small Generate a QR at \url{https://www.qrcode-monkey.com/}}\\
+                {\small Set the foreground to white (\#FFFFFF) and the background to Mila purple (\#662e7d).}
+            \end{center}
+        \end{minipage}
+    \end{beamercolorbox}
+
+    \vspace{0.8cm}
+
+    % --------------------------------------------------------
+    % MAIN COLUMNS
+    % --------------------------------------------------------
+    \begin{columns}[t,totalwidth=\textwidth]
+
+        % ========================================================
+        % COLUMN 1: Summary (and Title info if needed)
+        % ========================================================
+        \begin{column}{0.30\paperwidth}
+
+            % Summary guidance block
+            \begin{tcolorbox}[posterbox]
+                {\SectionHeading{SUMMARY}}
+
+                \vspace{0.5em}
+
+                This is for someone who will stop at your poster, but just wants to read. They should be able
+                to understand the idea without talking to you, so keep it tight and approachable.
+
+                \begin{itemize}
+                    \item Lead with the abstract-level hook so curiosity kicks in.
+                    \item Use the nice graphics around the text to reinforce your main message.
+                    \item Bold a surprising metric or claim that makes people ask you a question.
+                    \item Close with one sentence that suggests what they should do next (scan the QR, read the paper, etc.).
+                \end{itemize}
+            \end{tcolorbox}
+
+        \end{column}
+
+        % ========================================================
+        % COLUMN 2: Paper Figures
+        % ========================================================
+        \begin{column}{0.30\paperwidth}
+
+            % Central visual element
+            \begin{tcolorbox}[posterbox]
+                {\SectionHeading{FIGURES \& CALLOUTS}}
+
+                \vspace{0.5em}
+
+                \begin{center}
+                    \includegraphics[width=0.92\linewidth, height=12cm, keepaspectratio]{example-image-a}
+
+                    \vspace{0.4em}
+
+                    {\large Figure Caption}\\
+                    Explain the most important pipeline, diagram or comparison here. Keep it concise so you can elaborate while pointing at it.
+                \end{center}
+
+                \vspace{1cm}
+
+                \begin{center}
+                    \includegraphics[width=0.92\linewidth, height=12cm, keepaspectratio]{example-image-b}
+
+                    \vspace{0.4em}
+
+                    {\large Figure Caption}\\
+                    Use a second figure for ablations, qualitative examples, or anything that benefits from a visual walkthrough.
+                \end{center}
+
+            \end{tcolorbox}
+
+        \end{column}
+
+        % ========================================================
+        % COLUMN 3: Experiments, Details, Conclusions, Refs
+        % ========================================================
+        \begin{column}{0.30\paperwidth}
+
+            \begin{tcolorbox}[posterbox]
+                {\SectionHeading{EXPERIMENTS \& DETAILS}}
+
+                \vspace{0.5em}
+
+                This section is for people who stop at your poster and chat. Treat it like the extra figures
+                or tables you would keep in a slide deck. When you stand on this side, you can point to the
+                visuals while explaining the nuances.
+
+                \vspace{0.8em}
+
+                Highlight the experiment setup (datasets, key metrics, ablations) in short paragraphs instead
+                of long sentences. Keep a punchy takeaway for each bullet so you can guide the conversation:
+                \begin{itemize}
+                    \item Talk through the evaluation protocol and why it matters.
+                    \item Call out the delta between your method and the baseline.
+                    \item Mention qualitative wins or failure cases that invite discussion.
+                \end{itemize}
+
+                \vspace{0.8em}
+
+                If Summary feels too large and this column too small, shift the column widths until it balances
+                for your specific content.
+            \end{tcolorbox}
+
+            \vspace{1cm}
+
+            \begin{tcolorbox}[posterbox]
+                {\SectionHeading{REFERENCES}}
+
+                [1] Author et al. (2024) ``Paper Title''. Journal/Conf.\par
+                [2] Author et al. (2023) ``Another Paper''. Journal/Conf.
+            \end{tcolorbox}
+
+            \vspace{1cm}
+        \end{column}
+
+    \end{columns}
+
+    % --------------------------------------------------------
+    % BOTTOM LOGO STRIP (FIXED TO BOTTOM MARGIN)
+    % --------------------------------------------------------
+    \vfill
+    \begin{center}
+        {\setlength{\tabcolsep}{0.75cm}%
+        \begin{tabular}{ccc}
+            \includegraphics[height=10cm]{../img/udem.pdf} &
+            \includegraphics[height=10cm]{../img/mila_black.png} &
+            \includegraphics[height=10cm]{../img/mcgill.png}
+        \end{tabular}}
+    \end{center}
+    \vspace*{0.5cm}
+
+\end{frame}
+\end{document}
