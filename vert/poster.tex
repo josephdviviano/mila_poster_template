@@ -1,0 +1,194 @@
+\documentclass[final]{beamer}
+
+% ====================
+% Packages
+% ====================
+% Set custom size: 91.44cm x 121.92cm (approx 36x48 inches)
+\usepackage[orientation=portrait,size=custom,width=91.44,height=121.92,scale=1.4,debug]{beamerposter}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{helvet} % Clean, standard font
+\usepackage{tcolorbox} % For colored boxes
+\usepackage{graphicx} % For images
+\usepackage{svg} % For SVG images
+
+% ====================
+% Colors
+% ====================
+\definecolor{MilaMauve}{HTML}{662e7d}
+\definecolor{MilaWhite}{HTML}{FFFFFF}
+\definecolor{TextDark}{HTML}{333333}
+\definecolor{LightGray}{HTML}{F0F0F0}
+
+% ====================
+% Styling
+% ====================
+\setbeamercolor{background canvas}{bg=MilaWhite}
+\setbeamercolor{normal text}{fg=TextDark}
+\setbeamercolor{headline}{bg=MilaMauve,fg=MilaWhite}
+\setbeamercolor{block title}{bg=MilaMauve,fg=MilaWhite}
+\setbeamercolor{block body}{bg=LightGray,fg=TextDark}
+
+% Remove default navigation symbols
+\setbeamertemplate{navigation symbols}{}
+
+% ====================
+% Document
+% ====================
+\begin{document}
+\begin{frame}[t]
+
+    % --------------------------------------------------------
+    % TOP HORIZONTAL BLOCK: TITLE
+    % --------------------------------------------------------
+    % We use a colorbox to create the full-width purple header
+    \begin{tcolorbox}[
+        colback=MilaMauve,
+        colframe=MilaMauve,
+        width=\paperwidth,
+        sharp corners,
+        boxrule=0pt,
+        top=1.5cm, bottom=1cm,
+        halign=center
+    ]
+        {\usebeamerfont{title}\Huge \bfseries \textcolor{MilaWhite}{Your Paper Title Goes Here}}\\[0.8em]
+        {\usebeamerfont{author}\Large \textcolor{MilaWhite}{Author One$^{1}$, Author Two$^{2}$, Author Three$^{1}$}}\\[0.4em]
+        {\small \textcolor{MilaWhite}{1. Institution One \quad 2. Institution Two}}
+    \end{tcolorbox}
+
+    \vspace{1cm}
+
+    % --------------------------------------------------------
+    % MAIN COLUMNS
+    % --------------------------------------------------------
+    \begin{columns}[t]
+
+        % ========================================================
+        % COLUMN 1: Summary (and Title info if needed)
+        % ========================================================
+        \begin{column}{0.30\paperwidth}
+
+            % Standard Beamer Block for Sections
+            \begin{tcolorbox}[title=\textbf{SUMMARY}, colframe=MilaMauve, colback=white]
+                \textbf{Abstract / Introduction}
+                \vspace{0.5em}
+
+                This section introduces the problem and the motivation.
+
+                \begin{itemize}
+                    \item Point 1: Why is this problem important?
+                    \item Point 2: What are the current limitations?
+                    \item Point 3: What is our key contribution?
+                \end{itemize}
+            \end{tcolorbox}
+
+            \vspace{1cm}
+
+            \begin{tcolorbox}[title=\textbf{METHODOLOGY}, colframe=MilaMauve, colback=white]
+                Brief explanation of the method.
+
+                \vspace{0.5em}
+                \textit{Text description of the algorithm or model architecture goes here. Keep it concise.}
+            \end{tcolorbox}
+
+        \end{column}
+
+        % ========================================================
+        % COLUMN 2: Paper Figures
+        % ========================================================
+        \begin{column}{0.30\paperwidth}
+
+            % Central visual element
+            \begin{tcolorbox}[title=\textbf{KEY FIGURES}, colframe=MilaMauve, colback=white]
+
+                \begin{center}
+                    % Placeholder for Main Figure
+                    \includegraphics[width=0.9\linewidth, height=15cm, keepaspectratio]{example-image-a}
+                    \vspace{0.5em}
+
+                    {\small \textbf{Figure 1:} Detailed caption explaining the main architecture or concept.}
+                \end{center}
+
+                \vspace{1cm}
+
+                \begin{center}
+                    % Placeholder for Secondary Figure
+                    \includegraphics[width=0.9\linewidth, height=15cm, keepaspectratio]{example-image-b}
+                    \vspace{0.5em}
+
+                    {\small \textbf{Figure 2:} Detailed caption explaining the data flow or results visualization.}
+                \end{center}
+
+            \end{tcolorbox}
+
+        \end{column}
+
+        % ========================================================
+        % COLUMN 3: Experiments, Details, Conclusions, Refs
+        % ========================================================
+        \begin{column}{0.30\paperwidth}
+
+            \begin{tcolorbox}[title=\textbf{EXPERIMENTS}, colframe=MilaMauve, colback=white]
+                \textbf{Setup:}
+                \begin{itemize}
+                    \item Dataset used...
+                    \item Metrics evaluation...
+                \end{itemize}
+
+                \vspace{0.5em}
+
+                \textbf{Table 1: Quantitative Results}
+                \begin{center}
+                    \begin{tabular}{l c c}
+                        \hline
+                        Method & Acc & F1 \\
+                        \hline
+                        Baseline & 85.0 & 0.82 \\
+                        \textbf{Ours} & \textbf{92.4} & \textbf{0.91} \\
+                        \hline
+                    \end{tabular}
+                \end{center}
+            \end{tcolorbox}
+
+            \vspace{1cm}
+
+            \begin{tcolorbox}[title=\textbf{CONCLUSIONS}, colframe=MilaMauve, colback=white]
+                \begin{itemize}
+                    \item We proposed a novel method for X.
+                    \item We achieved state-of-the-art results on Y.
+                    \item Future work includes Z.
+                \end{itemize}
+            \end{tcolorbox}
+
+            \vspace{1cm}
+
+            \begin{tcolorbox}[title=\textbf{REFERENCES}, colframe=MilaMauve, colback=white]
+                \tiny % Smaller font for references
+                [1] Author et al. (2024) "Paper Title". Journal/Conf. \\
+                [2] Author et al. (2023) "Another Paper". Journal/Conf.
+            \end{tcolorbox}
+
+            \vspace{1cm}
+
+            % QR Code / Link area
+            \centering
+            \includegraphics[width=4cm]{example-image-1x1} \\
+            \tiny Scan for paper
+        \end{column}
+
+    \end{columns}
+
+    % --------------------------------------------------------
+    % BOTTOM LOGO STRIP
+    % --------------------------------------------------------
+    \vfill
+    \begin{center}
+        \includesvg[height=10cm]{../img/udem.svg}
+        \hspace{1.5cm}
+        \includegraphics[height=10cm]{../img/mila_black.png}
+        \hspace{1.5cm}
+        \includegraphics[height=10cm]{../img/mcgill.png}
+    \end{center}
+
+\end{frame}
+\end{document}
