@@ -40,6 +40,7 @@
     posterbox/.style={
         colback=white,
         boxrule=0pt,
+        colframe=white,
         sharp corners,
         enhanced,
         left=0.6cm,
@@ -72,23 +73,25 @@
     % --------------------------------------------------------
  \setbeamercolor{headline}{bg=MilaMauve,fg=MilaWhite}
 
-\begin{beamercolorbox}[wd=\paperwidth,ht=0.15\paperheight,dp=0ex,center,fg=milaWhite]{headline}
-        \begin{minipage}[c][0.15\paperheight]{0.64\textwidth}
+\begin{beamercolorbox}[wd=\paperwidth,ht=0.17\paperheight,dp=0ex,center,fg=milaWhite]{headline}
+        \begin{minipage}[c][0.17\paperheight]{0.64\textwidth}
             \vspace*{-12cm} % same offset so both columns align
             {\raggedright\TakeawayFont{One sentence takeaway for people walking by your poster, but not stopping}}\\[0.8em]
             {\PosterHeading{Paper Title}}\\[0.4em]
             {\Large Author One \quad Author Two \quad Author Three}\\[0.2em]
             {\large Institution One \quad|\quad Institution Two}
+            \vspace{2cm} 
         \end{minipage}%
         \hfill
-        \begin{minipage}[c][0.15\paperheight]{0.3\textwidth}
-            {\large Scan for the paper}\\[0.5em]
+        \begin{minipage}[c][0.17\paperheight]{0.3\textwidth}
+            % {\large Scan for the paper}\\[0.5em]
             \begin{center}
-                \vspace*{-12cm} % same offset so both columns align
+                \vspace*{-8cm} % same offset so both columns align
                 \includegraphics[width=4.5cm]{example-image-1x1}\\[0.4em]
                 {\small Generate a QR at \url{https://www.qrcode-monkey.com/}}\\
                 {\small Set the foreground to white (\#FFFFFF) and the background to Mila purple (\#662e7d).}
             \end{center}
+            \vspace{6cm} 
         \end{minipage}
     \end{beamercolorbox}
 
@@ -119,6 +122,18 @@
                     \item Bold a surprising metric or claim that makes people ask you a question.
                     \item Close with one sentence that suggests what they should do next (scan the QR, read the paper, etc.).
                 \end{itemize}
+            \end{tcolorbox}
+
+            \vfill
+
+            % Methods block
+            \begin{tcolorbox}[posterbox]
+                {\SectionHeading{METHODS}}
+
+                \vspace{0.5em}
+
+                This is to outline your method in a concise way. Use visuals to break up the text and make it more engaging.
+                
             \end{tcolorbox}
 
         \end{column}
