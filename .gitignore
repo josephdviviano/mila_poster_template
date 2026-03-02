@@ -1,12 +1,19 @@
+## LaTeX build artifacts
 *.toc
 *.snm
 *.nav
-*.snm
 *.out
 *.aux
 *.log
+*.fls
+*.fdb_latexmk
+*.vrb
+*.synctex.gz
 *.sty
 *.cls
 *.bst
 *.bbl
 *.blg
+
+## OS
+.DS_Store

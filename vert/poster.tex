@@ -3,13 +3,20 @@
 % ====================
 % Packages
 % ====================
-% Set custom size: 91.44cm x 121.92cm (approx 36x48 inches)
-\usepackage[orientation=portrait,size=custom,width=91.44,height=121.92,scale=1.4,debug]{beamerposter}
+% Set custom size:
+\usepackage[orientation=portrait,size=custom,width=60,height=91,scale=1,debug]{beamerposter}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage[default]{lato}
 \usepackage{tcolorbox} % For colored boxes
+\usepackage{listings}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage{colortbl}
 \usepackage{graphicx} % For images
+\usepackage{tikz}
 \tcbuselibrary{skins}
 % ====================
 % Colors
@@ -18,6 +25,10 @@
 \definecolor{MilaWhite}{HTML}{FFFFFF}
 \definecolor{TextDark}{HTML}{333333}
 \definecolor{LightGray}{HTML}{F0F0F0}
+\definecolor{CodeKeyword}{HTML}{5B2C6F}
+\definecolor{CodeComment}{HTML}{6C757D}
+\definecolor{CodeString}{HTML}{0B7285}
+\definecolor{CodeAccent}{HTML}{B23A48}
 
 % ====================
 % Styling
@@ -29,16 +40,18 @@
 \setbeamercolor{block body}{bg=white,fg=black}
 
 \renewcommand{\familydefault}{\sfdefault}
-\renewcommand{\normalsize}{\fontsize{42}{50}\selectfont}
+\renewcommand{\normalsize}{\fontsize{28}{30}\selectfont}
 \normalsize
 
-\newcommand{\PosterHeading}[1]{\fontsize{77}{84}\selectfont\bfseries #1}
-\newcommand{\TakeawayFont}[1]{{\fontsize{78}{86}\selectfont\bfseries #1}}
-\newcommand{\SectionHeading}[1]{\fontsize{48}{54}\selectfont\bfseries #1}
+\newcommand{\PosterHeading}[1]{\fontsize{60}{72}\selectfont\bfseries #1}
+\newcommand{\TakeawayFont}[1]{{\fontsize{48}{57.6}\selectfont\bfseries\itshape #1}}
+\newcommand{\SectionHeading}[1]{\fontsize{36}{43.2}\selectfont\bfseries #1}
+\newcommand{\PosterCodeFont}{\fontsize{18}{20}\selectfont}
 
 \tcbset{
     posterbox/.style={
         colback=white,
+        colframe=white,
         boxrule=0pt,
         sharp corners,
         enhanced,
@@ -48,6 +61,31 @@
         bottom=0.6cm
     }
 }
+
+\lstdefinestyle{posterpython}{
+    language=Python,
+    basicstyle=\PosterCodeFont\ttfamily,
+    keywordstyle=\color{CodeKeyword}\bfseries,
+    commentstyle=\color{CodeComment}\itshape,
+    stringstyle=\color{CodeString},
+    emphstyle=\color{CodeAccent}\bfseries,
+    showstringspaces=false,
+    columns=fullflexible,
+    keepspaces=true,
+    frame=none,
+    framerule=0.6pt,
+    backgroundcolor=\color{LightGray!10},
+    tabsize=4,
+    breaklines=false,
+    linewidth=\linewidth,
+    xleftmargin=0pt,
+    xrightmargin=0pt,
+    framexleftmargin=0pt,
+    framexrightmargin=0pt
+}
+\lstnewenvironment{python}[1][]{
+    \lstset{style=posterpython,#1}
+}{}
 
 % Remove default navigation symbols
 \setbeamertemplate{navigation symbols}{}
@@ -65,156 +103,189 @@
 % ====================
 \begin{document}
 
-\begin{frame}[t]
+\begin{frame}[t,fragile]
 
     % --------------------------------------------------------
-    % TOP HORIZONTAL BLOCK: TITLE (15% HEIGHT)
+    % TOP HORIZONTAL BLOCK: TITLE (20% HEIGHT)
     % --------------------------------------------------------
  \setbeamercolor{headline}{bg=MilaMauve,fg=MilaWhite}
 
-\begin{beamercolorbox}[wd=\paperwidth,ht=0.15\paperheight,dp=0ex,center,fg=milaWhite]{headline}
-        \begin{minipage}[c][0.15\paperheight]{0.64\textwidth}
-            \vspace*{-20cm} % same offset so both columns align
-            {\raggedright\TakeawayFont{One sentence takeaway for people walking by your poster, but not stopping}}\\[0.8em]
-            {\PosterHeading{Paper Title}}\\[0.4em]
-            {\Large Author One \quad Author Two \quad Author Three}\\[0.2em]
-            {\large Institution One \quad|\quad Institution Two}
+% Heading band
+\begin{beamercolorbox}[wd=\paperwidth,ht=0.20\paperheight,dp=0ex]{headline}
+        \hspace{0.015\paperwidth}%
+        \begin{minipage}[t][0.20\paperheight]{0.63\textwidth}
+            \vspace{-17cm}%
+            \raggedright
+            {\TakeawayFont{One sentence takeaway for people walking by your poster, but not stopping}}\\[0.6em]%
+            {\PosterHeading{Paper Title Goes Here}}\\[0.6em]%
+            {\Large Author One$^{\alpha}$, Author Two$^{\alpha,\beta}$, Author Three$^{\gamma}$}\\[0.4em]
+            {\large $^\alpha$Mila \quad $^\beta$Universit\'{e} de Montr\'{e}al \quad $^\gamma$McGill University}\\[0.3em]
+        \end{minipage}\hfill
+        \begin{minipage}[t][0.20\paperheight]{0.25\textwidth}
+            \raggedleft
+            \vspace{-17cm}% ensure top alignment
+            \colorbox{white}{\includegraphics[height=2.5cm]{../img/udem.pdf}}
+            \colorbox{white}{\includegraphics[height=2.5cm]{../img/mila_purple.png}} \\[0.5em]%
+            \includegraphics[width=4.5cm]{example-image-1x1}\\[0.3em]
+            {\small\color{white} Scan for the paper}
         \end{minipage}%
-        \hfill
-        \begin{minipage}[c][0.15\paperheight]{0.3\textwidth}
-            {\large Scan for the paper}\\[0.5em]
-            \begin{center}
-                \vspace*{-20cm} % same offset so both columns align
-                \includegraphics[width=4.5cm]{example-image-1x1}\\[0.4em]
-                {\small Generate a QR at \url{https://www.qrcode-monkey.com/}}\\
-                {\small Set the foreground to white (\#FFFFFF) and the background to Mila purple (\#662e7d).}
-            \end{center}
-        \end{minipage}
+        \hspace{0.015\paperwidth}
     \end{beamercolorbox}
-
-    \vspace{0.8cm}
 
     % --------------------------------------------------------
     % MAIN COLUMNS
     % --------------------------------------------------------
+    \vspace{-1.5cm}
     \begin{columns}[t,totalwidth=\textwidth]
 
         % ========================================================
-        % COLUMN 1: Summary (and Title info if needed)
+        % COLUMN 1: Abstract + Code Example
         % ========================================================
-        \begin{column}{0.30\paperwidth}
+        \begin{column}{0.38\paperwidth}
 
-            % Summary guidance block
             \begin{tcolorbox}[posterbox]
-                {\SectionHeading{SUMMARY}}
-
+                {\SectionHeading{ABSTRACT}}
                 \vspace{0.5em}
 
-                This is for someone who will stop at your poster, but just wants to read. They should be able
+                This is for someone who will stop at your poster and read. They should be able
                 to understand the idea without talking to you, so keep it tight and approachable.
+                \textbf{Bold a surprising metric or claim} that makes people ask you a question.
 
+                \vspace{2cm}
                 \begin{itemize}
                     \item Lead with the abstract-level hook so curiosity kicks in.
                     \item Use the nice graphics around the text to reinforce your main message.
-                    \item Bold a surprising metric or claim that makes people ask you a question.
+                    \item Mention qualitative wins or failure cases that invite discussion.
                     \item Close with one sentence that suggests what they should do next (scan the QR, read the paper, etc.).
                 \end{itemize}
+
+                \vspace{2cm}
+                {\SectionHeading{EXAMPLE}}
+                \vspace{0.5em}
+
+                A short code snippet demonstrating the core idea. Swap losses, environments,
+                or sampling methods with minimal code changes:
+
+\vspace{1cm}
+\begin{python}
+import torch
+from mylib import Environment, PolicyNet, train
+
+# Set up the environment and model.
+env = Environment(ndim=4, height=8)
+model = PolicyNet(
+    input_dim=env.obs_dim,
+    hidden_dim=256,
+    output_dim=env.n_actions,
+)
+optimizer = torch.optim.Adam(model.parameters(), lr=1e-3)
+
+# Training loop.
+for epoch in range(1000):
+    trajectories = env.sample(model, n=16)
+    loss = model.loss(trajectories)
+    optimizer.zero_grad()
+    loss.backward()
+    optimizer.step()
+\end{python}
+
+\vspace{1cm}
+This enables users to swap single elements of their training pipeline without
+changes to the rest of their code.
+
             \end{tcolorbox}
 
         \end{column}
 
         % ========================================================
-        % COLUMN 2: Paper Figures
+        % COLUMN 2: Figures, Table, References
         % ========================================================
-        \begin{column}{0.30\paperwidth}
+        \begin{column}{0.60\paperwidth}
 
             % Central visual element
             \begin{tcolorbox}[posterbox]
-                {\SectionHeading{FIGURES \& CALLOUTS}}
 
                 \vspace{0.5em}
 
                 \begin{center}
-                    \includegraphics[width=0.92\linewidth, height=12cm, keepaspectratio]{example-image-a}
+                    % Placeholder figure: a random graph using TikZ
+                    \begin{tikzpicture}[
+                        node distance=3cm,
+                        every node/.style={circle, draw=MilaMauve, fill=MilaMauve!15, minimum size=1.2cm, font=\large\bfseries},
+                        every edge/.style={draw=MilaMauve!70, thick}
+                    ]
+                        \node (A) at (0, 0)   {A};
+                        \node (B) at (3, 2)   {B};
+                        \node (C) at (7, 2.5) {C};
+                        \node (D) at (10, 0)  {D};
+                        \node (E) at (7,-2.5) {E};
+                        \node (F) at (3,-2)   {F};
+
+                        \draw (A) -- (B);
+                        \draw (A) -- (F);
+                        \draw (B) -- (C);
+                        \draw (B) -- (F);
+                        \draw (C) -- (D);
+                        \draw (C) -- (E);
+                        \draw (D) -- (E);
+                        \draw (E) -- (F);
+                        \draw (B) -- (E);
+                    \end{tikzpicture}
 
                     \vspace{0.4em}
 
-                    {\large Figure Caption}\\
-                    Explain the most important pipeline, diagram or comparison here. Keep it concise so you can elaborate while pointing at it.
-                \end{center}
-
-                \vspace{1cm}
-
-                \begin{center}
-                    \includegraphics[width=0.92\linewidth, height=12cm, keepaspectratio]{example-image-b}
-
-                    \vspace{0.4em}
-
-                    {\large Figure Caption}\\
-                    Use a second figure for ablations, qualitative examples, or anything that benefits from a visual walkthrough.
+                    {\large Figure 1: Placeholder graph.}\\
+                    Replace this TikZ figure with your main pipeline diagram or key result.
+                    Keep it large and central so it draws people in from across the room.
                 \end{center}
 
             \end{tcolorbox}
 
-        \end{column}
-
-        % ========================================================
-        % COLUMN 3: Experiments, Details, Conclusions, Refs
-        % ========================================================
-        \begin{column}{0.30\paperwidth}
-
             \begin{tcolorbox}[posterbox]
-                {\SectionHeading{EXPERIMENTS \& DETAILS}}
-
+                {\SectionHeading{KEY RESULTS}}
                 \vspace{0.5em}
 
-                This section is for people who stop at your poster and chat. Treat it like the extra figures
-                or tables you would keep in a slide deck. When you stand on this side, you can point to the
-                visuals while explaining the nuances.
-
-                \vspace{0.8em}
-
-                Highlight the experiment setup (datasets, key metrics, ablations) in short paragraphs instead
-                of long sentences. Keep a punchy takeaway for each bullet so you can guide the conversation:
                 \begin{itemize}
-                    \item Talk through the evaluation protocol and why it matters.
-                    \item Call out the delta between your method and the baseline.
-                    \item Mention qualitative wins or failure cases that invite discussion.
+                    \item \textbf{Modular design:} easily swap components to facilitate rapid experimentation.
+                    \item \textbf{Broad support:} handles discrete, continuous, and graph-structured domains.
+                    \item \textbf{Best practices:} continuous integration, typing, tests, and documentation.
                 \end{itemize}
-
-                \vspace{0.8em}
-
-                If Summary feels too large and this column too small, shift the column widths until it balances
-                for your specific content.
             \end{tcolorbox}
 
-            \vspace{1cm}
+            {\SectionHeading{COMPARISON}}
+            \vspace{0.5em}
+            \begin{table}[h]
+            \centering
+            \small
 
+            \begin{tabularx}{\textwidth}{l|>{\columncolor{gray!10}}X|X|X|X}
+
+            \toprule
+            \textbf{Method} & \textbf{Ours} & \textbf{Baseline A} & \textbf{Baseline B} & \textbf{Baseline C} \\
+            \midrule
+            \textbf{Accuracy} & \textbf{94.2} & 91.7 & 89.3 & 87.1 \\
+            \midrule
+            \textbf{F1 Score} & \textbf{0.923} & 0.894 & 0.871 & 0.852 \\
+            \midrule
+            \textbf{Latency (ms)} & \textbf{12.4} & 15.8 & 22.1 & 18.6 \\
+            \midrule
+            \textbf{Parameters (M)} & 3.2 & 4.1 & 5.7 & 3.8 \\
+            \bottomrule
+            \end{tabularx}
+            \end{table}
+
+            \vspace{-0.5em}
             \begin{tcolorbox}[posterbox]
-                {\SectionHeading{REFERENCES}}
-
-                [1] Author et al. (2024) ``Paper Title''. Journal/Conf.\par
-                [2] Author et al. (2023) ``Another Paper''. Journal/Conf.
+                {\scriptsize
+                [1] Author A et al. (2024) ``A Foundational Method for Placeholder Research''. \textit{Conf.\ on Examples}.\par
+                [2] Author B et al. (2023) ``Improving Baselines with Better Defaults''. \textit{Journal of Placeholder Studies}.\par
+                [3] Author C et al. (2023) ``On the Importance of Reproducible Templates''. \textit{Workshop on Posters}.
+                }
             \end{tcolorbox}
 
-            \vspace{1cm}
         \end{column}
 
     \end{columns}
-
-    % --------------------------------------------------------
-    % BOTTOM LOGO STRIP (FIXED TO BOTTOM MARGIN)
-    % --------------------------------------------------------
-    \vfill
-    \begin{center}
-        {\setlength{\tabcolsep}{0.75cm}%
-        \begin{tabular}{ccc}
-            \includegraphics[height=10cm]{../img/udem.pdf} &
-            \includegraphics[height=10cm]{../img/mila_black.png} &
-            \includegraphics[height=10cm]{../img/mcgill.png}
-        \end{tabular}}
-    \end{center}
-    \vspace*{0.5cm}
 
 \end{frame}
 \end{document}
